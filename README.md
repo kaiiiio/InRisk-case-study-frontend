@@ -66,10 +66,3 @@ A modern Next.js dashboard for exploring historical weather data. This applicati
 -   `src/components`: UI components (`InputPanel`, `FileList`, `WeatherDashboard`).
 -   `src/lib`: Utilities and API clients.
 
-## Deployment
-
-This app is optimized for **Vercel**.
-
-1.  Import project to Vercel.
-2.  Add `NEXT_PUBLIC_API_BASE_URL` environment variable.
-3.  Deploy.
