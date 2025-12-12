@@ -15,6 +15,14 @@ export default function InputPanel({ onFileStored }: InputPanelProps) {
     const [lon, setLon] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
+
+    // Open-Meteo Archive API typically has a delay of about 5 days for fully archived data, 
+    // though some recent data might be available. Safe bet is to restrict to past.
+    // We'll set the max allowed date to yesterday to prevent "future" errors.
+    const maxDate = new Date();
+    maxDate.setDate(maxDate.getDate() - 1);
+    const maxDateStr = maxDate.toISOString().split('T')[0];
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [message, setMessage] = useState<string | null>(null);
@@ -113,6 +121,7 @@ export default function InputPanel({ onFileStored }: InputPanelProps) {
                         <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">Start Date</label>
                         <input
                             type="date"
+                            max={maxDateStr}
                             value={startDate}
                             onChange={(e) => setStartDate(e.target.value)}
                             className="w-full p-2 border border-zinc-300 dark:border-zinc-700 rounded-md bg-transparent text-zinc-900 dark:text-zinc-100 focus:ring-2 focus:ring-blue-500 outline-none"
@@ -123,6 +132,7 @@ export default function InputPanel({ onFileStored }: InputPanelProps) {
                         <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">End Date</label>
                         <input
                             type="date"
+                            max={maxDateStr}
                             value={endDate}
                             onChange={(e) => setEndDate(e.target.value)}
                             className="w-full p-2 border border-zinc-300 dark:border-zinc-700 rounded-md bg-transparent text-zinc-900 dark:text-zinc-100 focus:ring-2 focus:ring-blue-500 outline-none"
