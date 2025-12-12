@@ -16,9 +16,6 @@ export default function InputPanel({ onFileStored }: InputPanelProps) {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
-    // Open-Meteo Archive API typically has a delay of about 5 days for fully archived data, 
-    // though some recent data might be available. Safe bet is to restrict to past.
-    // We'll set the max allowed date to yesterday to prevent "future" errors.
     const maxDate = new Date();
     maxDate.setDate(maxDate.getDate() - 1);
     const maxDateStr = maxDate.toISOString().split('T')[0];
